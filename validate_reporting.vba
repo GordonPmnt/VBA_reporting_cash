@@ -1,5 +1,5 @@
 Option Explicit
-Sub SaveData()
+Sub ValidateReporting()
 
     Dim Response As Integer
     Dim Week As String
