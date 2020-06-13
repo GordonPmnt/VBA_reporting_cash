@@ -37,4 +37,6 @@ Function WeekAlreadyExists(Week) As Boolean
         WeekAlreadyExists = False
     End If
     
+    Sheets(ReportingSheet).Activate
+    
 End Function
