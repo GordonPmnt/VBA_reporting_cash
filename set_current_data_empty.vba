@@ -25,4 +25,7 @@ Sub SetCurrentDataToEmpty()
     CurrentStocks.Value = ""
     CurrentOrderBook.Value = ""
     
+    Range("B25:B26") = ""
+    Range("B113:B114") = ""
+    
 End Sub
