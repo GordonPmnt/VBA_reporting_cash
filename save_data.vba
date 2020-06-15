@@ -2,22 +2,33 @@ Option Explicit
 Option Private Module
 Sub SaveData()
 
-    Call CollectData
+    Call CollectCurrentWeekData
 
 End Sub
-Sub CollectData()
+Sub CollectCurrentWeekData()
 
-    Dim CurrentSocialColumn As Variant
+    Dim CurrentSocial As Variant
     Dim CurrentAgingClients As Variant
     Dim CurrentAgingSuppliers As Variant
     Dim CurrentStocks As Variant
     Dim CurrentOrderBook As Variant
     
-    CurrentSocialColumn = Range("B10:B18")
-    CurrentAgingClients = Range("B85:B89")
-    CurrentAgingSuppliers = Range("B95:B99")
-    CurrentStocks = Range("B105:B107")
-    CurrentOrderBook = Range("B119:B124")
+    CurrentSocial = _
+        SetParams("CurrentSocial")
+        
+    CurrentAgingClients = _
+        SetParams("CurrentAgingClients")
+        
+    CurrentAgingSuppliers = _
+        SetParams("CurrentAgingSuppliers")
+        
+    CurrentStocks = _
+        SetParams("CurrentStocks")
+        
+    CurrentOrderBook = _
+        SetParams("CurrentOrderBook")
 
 End Sub
+
+
 
