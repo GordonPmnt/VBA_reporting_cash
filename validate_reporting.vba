@@ -21,10 +21,12 @@ Sub ValidateReporting()
             )
             If Response = vbYes Then
                 Call SaveData
+                MsgBox ("Reporting is now up to date.")
             End If
         Else
             Call ShiftPreviousWeeksData
             Call SaveData
+            MsgBox ("Reporting is now up to date.")
         End If
     End If
 
