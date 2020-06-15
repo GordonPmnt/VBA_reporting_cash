@@ -22,7 +22,7 @@ Sub ValidateReporting()
                 Debug.Print ("Continue Overwritte")
             End If
         Else
-            Debug.Print ("Continue New")
+            Call ShiftPreviousWeeksData
         End If
     End If
 
@@ -63,7 +63,20 @@ Private Sub ShiftPreviousWeeksData()
     
     Sheets(DataSheet).Activate
     
-    Set PreviousSocialWeeks = Range(SetParams("PreviousSocialWeeks"))
+    Set PreviousSocialWeeks = _
+        Range(SetParams("PreviousSocialWeeks"))
+        
+    Set PreviousAgingClientsWeeks = _
+        Range(SetParams("PreviousAgingClientsWeeks"))
+        
+    Set PreviousAgingSuppliersWeeks = _
+        Range(SetParams("PreviousAgingSuppliersWeeks"))
+        
+    Set PreviousStockWeeks = _
+        Range(SetParams("PreviousStockWeeks"))
+        
+    Set PreviousOrderBookWeeks = _
+        Range(SetParams("PreviousOrderBookWeeks"))
 
     Call ShiftData(PreviousSocialWeeks)
     Call ShiftData(PreviousAgingClientsWeeks)
