@@ -33,8 +33,8 @@ Function WeekAlreadyExists(Week) As Boolean
     Dim ReportingSheet As String
     Dim RepWeek As String
     
-    DataSheet = SetDataSheet()
-    ReportingSheet = SetReportingSheet()
+    DataSheet = SetParams("DataSheet")
+    ReportingSheet = SetParams("ReportingSheet")
     
     Sheets(DataSheet).Activate
     RepWeek = Range("K3")
