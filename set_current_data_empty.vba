@@ -7,6 +7,7 @@ Sub SetCurrentDataToEmpty()
     Dim CurrentAgingSuppliers As Range
     Dim CurrentStocks As Range
     Dim CurrentOrderBook As Range
+    Dim TreasuryForecast As Range
     
     Set CurrentSocial = _
         Range(SetParams("CurrentSocial"))
@@ -18,12 +19,15 @@ Sub SetCurrentDataToEmpty()
         Range(SetParams("CurrentStocks"))
     Set CurrentOrderBook = _
         Range(SetParams("CurrentOrderBook"))
+    Set TreasuryForecast = _
+        Range(SetParams("TreasuryForecast"))
     
     CurrentSocial.Value = ""
     CurrentAgingClients.Value = ""
     CurrentAgingSuppliers.Value = ""
     CurrentStocks.Value = ""
     CurrentOrderBook.Value = ""
+    TreasuryForecast.Value = ""
     
     Range("B25:B26") = ""
     Range("B113:B114") = ""

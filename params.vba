@@ -24,6 +24,9 @@ Function SetParams(Param) As String
             
         Case "CurrentOrderBook"
             SetParams = "B119:B124"
+            
+        Case "TreasuryForecast"
+            SetParams = "C35:O44"
         
         
         'IMPORTANT: When referencing previous week range, please always omit column B !!
