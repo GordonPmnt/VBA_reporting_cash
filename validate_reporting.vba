@@ -5,6 +5,7 @@ Sub ValidateReporting()
     Dim Week As String
     
     Week = Range("B2")
+    
     Response = MsgBox( _
         "You're about to save the report data of week " + Week + ". Do you want to continue?", _
         vbYesNo, _
@@ -19,10 +20,11 @@ Sub ValidateReporting()
                 "Week already imported" _
             )
             If Response = vbYes Then
-                Debug.Print ("Continue Overwritte")
+                Call SaveData
             End If
         Else
             Call ShiftPreviousWeeksData
+            Call SaveData
         End If
     End If
 
