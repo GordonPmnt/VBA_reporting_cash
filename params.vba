@@ -27,6 +27,7 @@ Function SetParams(Param) As String
         
         
         'IMPORTANT: When referencing previous week range, please always omit column B !!
+        ' Column B is the oldest week, which is deleted when shifting data
         '------------------------------------------------------------------------
         
         Case "PreviousSocialWeeks"
