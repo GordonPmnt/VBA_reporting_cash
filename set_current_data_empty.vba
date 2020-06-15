@@ -14,5 +14,4 @@ Sub SetCurrentDataToEmpty()
     CurrentStocks.Value = ""
     CurrentOrderBook.Value = ""
     
-
 End Sub
