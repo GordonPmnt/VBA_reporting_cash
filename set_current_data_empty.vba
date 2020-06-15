@@ -9,10 +9,10 @@ Sub SetCurrentDataToEmpty()
     Dim CurrentOrderBook As Range
     
     CurrentSocial.Value = ""
-    CurrentAgingClients = ""
-    CurrentAgingSuppliers = ""
-    CurrentStocks = ""
-    CurrentOrderBook = ""
+    CurrentAgingClients.Value = ""
+    CurrentAgingSuppliers.Value = ""
+    CurrentStocks.Value = ""
+    CurrentOrderBook.Value = ""
     
 
 End Sub
