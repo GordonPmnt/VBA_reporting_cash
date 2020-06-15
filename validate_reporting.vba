@@ -48,3 +48,40 @@ Function WeekAlreadyExists(Week) As Boolean
     Sheets(ReportingSheet).Activate
     
 End Function
+Private Sub ShiftPreviousWeeksData()
+
+    Dim DataSheet As String
+    Dim ReportingSheet As String
+    Dim PreviousSocialWeeks As Range
+    Dim PreviousAgingClientsWeeks As Range
+    Dim PreviousAgingSuppliersWeeks As Range
+    Dim PreviousStockWeeks As Range
+    Dim PreviousOrderBookWeeks As Range
+    
+    DataSheet = SetParams("DataSheet")
+    ReportingSheet = SetParams("ReportingSheet")
+    
+    Sheets(DataSheet).Activate
+    
+    Set PreviousSocialWeeks = Range(SetParams("PreviousSocialWeeks"))
+
+    Call ShiftData(PreviousSocialWeeks)
+    Call ShiftData(PreviousAgingClientsWeeks)
+    Call ShiftData(PreviousAgingSuppliersWeeks)
+    Call ShiftData(PreviousStockWeeks)
+    Call ShiftData(PreviousOrderBookWeeks)
+    
+    Sheets(ReportingSheet).Activate
+
+End Sub
+Private Sub ShiftData(PreviousValues)
+
+    PreviousValues.Copy
+    PreviousValues.Offset(0, -1).Select
+    ActiveSheet.PasteSpecial _
+        Format:=3, _
+        Link:=1, _
+        DisplayAsIcon:=False, _
+        IconFileName:=False
+
+End Sub
