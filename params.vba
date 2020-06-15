@@ -6,7 +6,7 @@ Function SetParams(Param) As String
     
         Case "DataSheet"
             SetParams = "Data Simair"
-            
+
         Case "ReportingSheet"
             SetParams = "Reporting Simair"
         
@@ -25,6 +25,10 @@ Function SetParams(Param) As String
         Case "CurrentOrderBook"
             SetParams = "B119:B124"
         
+        
+        'IMPORTANT: When referencing previous week range, please always omit column B !!
+        '------------------------------------------------------------------------
+        
         Case "PreviousSocialWeeks"
             SetParams = "C3:K12"
             
@@ -35,7 +39,7 @@ Function SetParams(Param) As String
             SetParams = "C30:K36"
         
         Case "PreviousStockWeeks"
-            SetParams = "C41:K43"
+            SetParams = "C40:K43"
         
         Case "PreviousOrderBookWeeks"
             SetParams = "C49:K56"
