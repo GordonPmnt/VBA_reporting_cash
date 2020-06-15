@@ -5,11 +5,19 @@ Sub ValidateReporting()
     Dim Week As String
     
     Week = Range("B2")
-    Response = MsgBox("You're about to save the report data of week " + Week + ". Do you want to continue?", vbYesNo, "Save Data")
+    Response = MsgBox( _
+        "You're about to save the report data of week " + Week + ". Do you want to continue?", _
+        vbYesNo, _
+        "Save Data" _
+    )
     
     If Response = vbYes Then
         If WeekAlreadyExists(Week) Then
-            Response = MsgBox("This week has already been imported. Do you want to continue and overwrite data ?", vbYesNo, "Week already imported")
+            Response = MsgBox( _
+                "This week has already been imported. Do you want to continue and overwrite data ?", _
+                vbYesNo, _
+                "Week already imported" _
+            )
             If Response = vbYes Then
                 Debug.Print ("Continue Overwritte")
             End If
