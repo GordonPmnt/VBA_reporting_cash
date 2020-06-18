@@ -14,40 +14,21 @@ Function SetParams(Param) As String
             SetParams = "B10:B18"
             
         Case "CurrentAgingClients"
-            SetParams = "B86:B90"
+            SetParams = "B86:B91"
             
         Case "CurrentAgingSuppliers"
-            SetParams = "B96:B100"
+            SetParams = "B96:B101"
         
         Case "CurrentStocks"
-            SetParams = "B106:B108"
+            SetParams = "B106:B109"
             
         Case "CurrentOrderBook"
-            SetParams = "B120:B125"
+            SetParams = "B120:B126"
             
         Case "TreasuryForecast"
-            SetParams = "C36:O45"
-        
-
-        'IMPORTANT: When referencing previous week range, please always omit column B !!
-        ' Column B is the oldest week, which is deleted when shifting data
-        '------------------------------------------------------------------------
-        
-        Case "PreviousSocialWeeks"
-            SetParams = "C3:K12"
-            
-        Case "PreviousAgingClientsWeeks"
-            SetParams = "C21:K27"
-        
-        Case "PreviousAgingSuppliersWeeks"
-            SetParams = "C30:K36"
-        
-        Case "PreviousStockWeeks"
-            SetParams = "C40:K43"
-        
-        Case "PreviousOrderBookWeeks"
-            SetParams = "C49:K56"
+            SetParams = "C34:O46"
             
     End Select
 
 End Function
+

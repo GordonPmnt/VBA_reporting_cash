@@ -7,13 +7,13 @@ Sub ResetData()
     Week = Range("B2")
     
     Response = MsgBox( _
-        "You're about to delete the reporting sheet data. Do you want to continue?", _
+        "You're about to delete the data from reporting sheet. Do you want to continue?", _
         vbYesNo, _
         "Reset Data" _
     )
     
     If Response = vbYes Then
-        Call SetCurrentDataToEmpty
+        Call API(Week, "RESET")
         MsgBox ("Reporting is now reset and ready for filling in new data.")
     End If
 

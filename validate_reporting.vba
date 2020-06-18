@@ -20,12 +20,13 @@ Sub ValidateReporting()
                 "Week already imported" _
             )
             If Response = vbYes Then
-                Call SaveData
+                Call UPDATE(Week)
                 MsgBox ("Reporting is now up to date.")
             End If
         Else
-            Call ShiftPreviousWeeksData
-            Call SaveData
+            Call API(Week, "CREATE")
+            Call AddWeekToParams(Week)
+            'TO DO UPDATE FORMULAS
             MsgBox ("Reporting is now up to date.")
         End If
     End If
@@ -33,22 +34,43 @@ Sub ValidateReporting()
 End Sub
 Function WeekAlreadyExists(Week) As Boolean
     
-    Dim DataSheet As String
     Dim ReportingSheet As String
-    Dim RepWeek As String
+    Dim Weeks As Range
+    Dim Cell As Variant
+    Dim i As Integer
     
-    DataSheet = SetParams("DataSheet")
     ReportingSheet = SetParams("ReportingSheet")
+    i = 0
     
-    Sheets(DataSheet).Activate
-    RepWeek = Range("K3")
+    Sheets("Weeks").Activate
+    Set Weeks = Range("WEEKS[REPORT]")
     
-    If RepWeek = ("W" & Week) Then
+    For Each Cell In Weeks
+        If ("W" + Week) = Cell Then
+            i = 1
+        End If
+        Next Cell
+    
+    If i = 1 Then
         WeekAlreadyExists = True
     Else
         WeekAlreadyExists = False
     End If
     
     Sheets(ReportingSheet).Activate
-    
 End Function
+Sub AddWeekToParams(Week)
+
+    Dim NewRow As ListRow
+    Dim ReportingSheet As String
+    
+    Sheets("Weeks").Activate
+    Set NewRow = ActiveSheet.ListObjects("WEEKS").ListRows.Add
+        NewRow.Range(1) = "W" + Week
+    
+    ReportingSheet = SetParams("ReportingSheet")
+    Sheets(ReportingSheet).Activate
+    
+End Sub
+    
+End Sub
