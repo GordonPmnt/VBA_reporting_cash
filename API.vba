@@ -104,7 +104,15 @@ Sub API(Week, Method)
         CurrentAgingSuppliers.Value = ""
         CurrentStocks.Value = ""
         CurrentOrderBook.Value = ""
-        TreasuryForecast.Value = ""
+        
+  
+        Union( _
+            Intersect(Rows("36:41"), TreasuryForecast), _
+            Intersect(Rows("43:45"), TreasuryForecast) _
+        ).Select
+        
+        Selection = ""
+        
         Range("B25:B26") = ""
         Range("B113:B114") = ""
         
