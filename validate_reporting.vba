@@ -20,7 +20,7 @@ Sub ValidateReporting()
                 "Week already imported" _
             )
             If Response = vbYes Then
-                Call UPDATE(Week)
+                Call API(Week, "UPDATE")
                 MsgBox ("Reporting is now up to date.")
             End If
         Else
@@ -49,7 +49,7 @@ Function WeekAlreadyExists(Week) As Boolean
         If ("W" + Week) = Cell Then
             i = 1
         End If
-        Next Cell
+    Next Cell
     
     If i = 1 Then
         WeekAlreadyExists = True
@@ -70,7 +70,5 @@ Sub AddWeekToParams(Week)
     
     ReportingSheet = SetParams("ReportingSheet")
     Sheets(ReportingSheet).Activate
-    
-End Sub
     
 End Sub

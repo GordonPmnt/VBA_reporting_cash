@@ -12,6 +12,12 @@ Sub API(Week, Method)
     Dim CurrentOrderBook As Range
     Dim TreasuryForecast As Range
     
+    Dim SocialCol As Range
+    Dim AGClientsCol As Range
+    Dim AGSuppCol As Range
+    Dim StocksCol As Range
+    Dim OrdersCol As Range
+    
     Dim NewColumn As ListColumn
 
 
@@ -46,23 +52,28 @@ Sub API(Week, Method)
         Sheets(DataSheet).Activate
     
         Set NewColumn = ActiveSheet.ListObjects("SOCIAL").ListColumns.Add
-            Call CopyPasteCurrentValues(CurrentSocial, NewColumn, 2)
-        
+            Call CopyPasteCurrentValues( _
+                CurrentSocial, NewColumn, 2, True _
+            )
         Set NewColumn = ActiveSheet.ListObjects("AG_CLIENTS").ListColumns.Add
             NewColumn.Range(2) = "CLIENTS"
-            Call CopyPasteCurrentValues(CurrentAgingClients, NewColumn, 3)
-
+            Call CopyPasteCurrentValues( _
+                CurrentAgingClients, NewColumn, 3, True _
+            )
         Set NewColumn = ActiveSheet.ListObjects("AG_SUPPLIERS").ListColumns.Add
             NewColumn.Range(2) = "FOURNISSEURS"
-            Call CopyPasteCurrentValues(CurrentAgingSuppliers, NewColumn, 3)
-        
+            Call CopyPasteCurrentValues( _
+                CurrentAgingSuppliers, NewColumn, 3, True _
+            )
         Set NewColumn = ActiveSheet.ListObjects("STOCKS").ListColumns.Add
-            Call CopyPasteCurrentValues(CurrentStocks, NewColumn, 2)
-            
+            Call CopyPasteCurrentValues( _
+                CurrentStocks, NewColumn, 2, True _
+            )
         Set NewColumn = ActiveSheet.ListObjects("ORDERS_BOOK").ListColumns.Add
             NewColumn.Range(2) = "Montant CA (K€)"
-            Call CopyPasteCurrentValues(CurrentOrderBook, NewColumn, 3)
-            
+            Call CopyPasteCurrentValues( _
+                CurrentOrderBook, NewColumn, 3, True _
+            )
         Set NewColumn = ActiveSheet.ListObjects("FTE_SUM").ListColumns.Add
             NewColumn.Range(2).Offset(0, -1).Select
             Range(Selection, Selection.End(xlDown)).Copy
@@ -72,8 +83,8 @@ Sub API(Week, Method)
                 Operation:=xlNone, _
                 SkipBlanks:=False, _
                 Transpose:=False
-                TreasuryForecast.Copy
-                
+            
+            TreasuryForecast.Copy
             Range("C64").Select
             Selection.PasteSpecial _
                 Paste:=xlPasteValues, _
@@ -98,19 +109,60 @@ Sub API(Week, Method)
         Range("B113:B114") = ""
         
     End If
+    
+    
+    
+    If Method = "UPDATE" Then
+    
+        Sheets(DataSheet).Activate
+    
+        Set SocialCol = Range("SOCIAL[W" + Week + "]")
+        Set AGClientsCol = Range("AG_CLIENTS[W" + Week + "]")
+        Set AGSuppCol = Range("AG_SUPPLIERS[W" + Week + "]")
+        Set StocksCol = Range("STOCKS[W" + Week + "]")
+        Set OrdersCol = Range("ORDERS_BOOK[W" + Week + "]")
+        
+        Call CopyPasteCurrentValues( _
+            CurrentSocial, SocialCol, 2, False _
+        )
+        Call CopyPasteCurrentValues( _
+            CurrentAgingClients, AGClientsCol, 3, False _
+        )
+        Call CopyPasteCurrentValues( _
+            CurrentAgingSuppliers, AGSuppCol, 3, False _
+        )
+        Call CopyPasteCurrentValues( _
+            CurrentStocks, StocksCol, 2, False _
+        )
+        Call CopyPasteCurrentValues( _
+            CurrentOrderBook, OrdersCol, 3, False _
+        )
+    
+        TreasuryForecast.Copy
+        Range("C64").Select
+        Selection.PasteSpecial _
+                Paste:=xlPasteValues, _
+                Operation:=xlNone, _
+                SkipBlanks:=False, _
+                Transpose:=False
+    
+    End If
 
 End Sub
-
-
-Sub CopyPasteCurrentValues(CurrentValues, Column, StartRow)
+Sub CopyPasteCurrentValues(CurrentValues, Column, StartRow, Creation)
     
     CurrentValues.Copy
     
-    Column.Range(StartRow).Select
-    ActiveSheet.PasteSpecial _
-        Format:=3, _
-        Link:=1, _
-        DisplayAsIcon:=False, _
-        IconFileName:=False
+    If Creation Then
+        Column.Range(StartRow).Select
+    Else
+        Column.Offset(StartRow - 2, 0).Select
+    End If
+    
+    Selection.PasteSpecial _
+            Paste:=xlPasteValues, _
+            Operation:=xlNone, _
+            SkipBlanks:=False, _
+            Transpose:=False
     
 End Sub
