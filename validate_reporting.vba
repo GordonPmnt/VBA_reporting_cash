@@ -20,13 +20,18 @@ Sub ValidateReporting()
                 "Week already imported" _
             )
             If Response = vbYes Then
+                Call UnProtectSheets
                 Call API(Week, "UPDATE")
+                Call CompareWeek(Week)
+                Call ProtectSheets
                 MsgBox ("Reporting is now up to date.")
             End If
         Else
+            Call UnProtectSheets
             Call API(Week, "CREATE")
             Call AddWeekToParams(Week)
-            'TO DO UPDATE FORMULAS
+            Call CompareWeek(Week)
+            Call ProtectSheets
             MsgBox ("Reporting is now up to date.")
         End If
     End If
@@ -49,7 +54,7 @@ Function WeekAlreadyExists(Week) As Boolean
         If ("W" + Week) = Cell Then
             i = 1
         End If
-    Next Cell
+        Next Cell
     
     If i = 1 Then
         WeekAlreadyExists = True
@@ -72,3 +77,50 @@ Sub AddWeekToParams(Week)
     Sheets(ReportingSheet).Activate
     
 End Sub
+Sub CompareWeek(Week)
+
+    Dim DataSheet As String
+    Dim ReportingSheet As String
+    
+    Dim SocialCol As Range
+    Dim AGClientsCol As Range
+    Dim AGSuppCol As Range
+    Dim StocksCol As Range
+    Dim OrdersCol As Range
+    
+    Dim PrevWeek As String
+    PrevWeek = Week - 1
+
+    DataSheet = SetParams("DataSheet")
+    ReportingSheet = SetParams("ReportingSheet")
+    
+    Sheets(DataSheet).Activate
+    
+        Set SocialCol = Range("SOCIAL[W" + PrevWeek + "]")
+        Set AGClientsCol = Range("AG_CLIENTS[W" + PrevWeek + "]")
+        Set AGSuppCol = Range("AG_SUPPLIERS[W" + PrevWeek + "]")
+        Set StocksCol = Range("STOCKS[W" + PrevWeek + "]")
+        Set OrdersCol = Range("ORDERS_BOOK[W" + PrevWeek + "]")
+            
+        
+    Sheets(ReportingSheet).Activate
+        
+        Call CopyPasteData(SocialCol, Range("G10"))
+        Call CopyPasteData(AGClientsCol, Range("I85"))
+        Call CopyPasteData(AGSuppCol, Range("I95"))
+        Call CopyPasteData(StocksCol, Range("I105"))
+        Call CopyPasteData(OrdersCol, Range("I119"))
+
+End Sub
+Sub CopyPasteData(Data, Destination)
+    
+    Data.Copy
+    Destination.Select
+    Selection.PasteSpecial _
+            Paste:=xlPasteValues, _
+            Operation:=xlNone, _
+            SkipBlanks:=False, _
+            Transpose:=False
+    
+End Sub
+

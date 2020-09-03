@@ -3,7 +3,11 @@ Option Private Module
 Function SetParams(Param) As String
 
     Select Case Param
-    
+        
+        'Never share the below:
+        Case "Password"
+            SetParams = "HOUGOUADMIN"
+            
         Case "DataSheet"
             SetParams = "Data Simair"
 
@@ -31,4 +35,3 @@ Function SetParams(Param) As String
     End Select
 
 End Function
-

@@ -14,9 +14,11 @@ Sub ResetData()
     
     If Response = vbYes Then
         If WeekAlreadyExists(Week) Then
+            Call UnProtectSheets
             Call API(Week, "RESET")
             Call ShiftWeek(Week)
             Range("B2") = Week + 1 'Increment week
+            Call ProtectSheets
             MsgBox ("Reporting is now reset and ready for filling in new data.")
         Else
             Response = MsgBox( _
