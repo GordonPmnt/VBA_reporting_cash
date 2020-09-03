@@ -87,6 +87,7 @@ Sub CompareWeek(Week)
     Dim AGSuppCol As Range
     Dim StocksCol As Range
     Dim OrdersCol As Range
+    Dim MonthTurnoverCol As Range
     
     Dim PrevWeek As String
     PrevWeek = Week - 1
@@ -101,6 +102,7 @@ Sub CompareWeek(Week)
         Set AGSuppCol = Range("AG_SUPPLIERS[W" + PrevWeek + "]")
         Set StocksCol = Range("STOCKS[W" + PrevWeek + "]")
         Set OrdersCol = Range("ORDERS_BOOK[W" + PrevWeek + "]")
+        Set MonthTurnoverCol = Range("MONTH_CA[W" + PrevWeek + "]")
             
         
     Sheets(ReportingSheet).Activate
@@ -110,6 +112,7 @@ Sub CompareWeek(Week)
         Call CopyPasteData(AGSuppCol, Range(SetParams("CompareAGSuppliers")))
         Call CopyPasteData(StocksCol, Range(SetParams("CompareStocks")))
         Call CopyPasteData(OrdersCol, Range(SetParams("CompareOrderBook")))
+        Call CopyPasteData(MonthTurnoverCol, Range(SetParams("CompareMonthTurnover")))
 
 End Sub
 Sub CopyPasteData(Data, Destination)

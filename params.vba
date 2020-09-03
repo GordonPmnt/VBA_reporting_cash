@@ -56,6 +56,9 @@ Function SetParams(Param) As String
         Case "CompareOrderBook"
             SetParams = "I122"
         
+        Case "CompareMonthTurnover"
+            SetParams = "I117"
+        
             
     End Select
 

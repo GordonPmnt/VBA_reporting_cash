@@ -40,6 +40,7 @@ Sub ShiftWeek(Week)
     Dim AGSuppCol As Range
     Dim StocksCol As Range
     Dim OrdersCol As Range
+    Dim MonthTurnoverCol As Range
 
     DataSheet = SetParams("DataSheet")
     ReportingSheet = SetParams("ReportingSheet")
@@ -51,6 +52,7 @@ Sub ShiftWeek(Week)
         Set AGSuppCol = Range("AG_SUPPLIERS[W" + Week + "]")
         Set StocksCol = Range("STOCKS[W" + Week + "]")
         Set OrdersCol = Range("ORDERS_BOOK[W" + Week + "]")
+        Set MonthTurnoverCol = Range("MONTH_CA[W" + Week + "]")
             
         
     Sheets(ReportingSheet).Activate
@@ -60,6 +62,7 @@ Sub ShiftWeek(Week)
         Call CopyPasteData(AGSuppCol, Range(SetParams("CompareAGSuppliers")))
         Call CopyPasteData(StocksCol, Range(SetParams("CompareStocks")))
         Call CopyPasteData(OrdersCol, Range(SetParams("CompareOrderBook")))
+        Call CopyPasteData(MonthTurnoverCol, Range(SetParams("CompareMonthTurnover")))
         
 
 End Sub
