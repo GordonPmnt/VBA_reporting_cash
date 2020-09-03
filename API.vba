@@ -11,12 +11,14 @@ Sub API(Week, Method)
     Dim CurrentStocks As Range
     Dim CurrentOrderBook As Range
     Dim TreasuryForecast As Range
+    Dim CurrentMonthTurnover As Range
     
     Dim SocialCol As Range
     Dim AGClientsCol As Range
     Dim AGSuppCol As Range
     Dim StocksCol As Range
     Dim OrdersCol As Range
+    Dim MonthTurnoverCol As Range
     
     Dim NewColumn As ListColumn
 
@@ -44,7 +46,10 @@ Sub API(Week, Method)
             
         Set TreasuryForecast = _
             Range(SetParams("TreasuryForecast"))
-    
+            
+        Set CurrentMonthTurnover = _
+            Range(SetParams("CurrentMonthTurnover"))
+            
     
     
     If Method = "CREATE" Then
@@ -70,9 +75,13 @@ Sub API(Week, Method)
                 CurrentStocks, NewColumn, 2, True _
             )
         Set NewColumn = ActiveSheet.ListObjects("ORDERS_BOOK").ListColumns.Add
-            NewColumn.Range(2) = "Montant CA (K€)"
+            NewColumn.Range(2) = "Montant CA (KÛ)"
             Call CopyPasteCurrentValues( _
                 CurrentOrderBook, NewColumn, 3, True _
+            )
+        Set NewColumn = ActiveSheet.ListObjects("MONTH_CA").ListColumns.Add
+            Call CopyPasteCurrentValues( _
+                CurrentMonthTurnover, NewColumn, 2, True _
             )
         Set NewColumn = ActiveSheet.ListObjects("FTE_SUM").ListColumns.Add
             NewColumn.Range(2).Offset(0, -1).Select
@@ -104,6 +113,7 @@ Sub API(Week, Method)
         CurrentAgingSuppliers.Value = ""
         CurrentStocks.Value = ""
         CurrentOrderBook.Value = ""
+        CurrentMonthTurnover.Value = ""
         
   
         Union( _
@@ -129,6 +139,7 @@ Sub API(Week, Method)
         Set AGSuppCol = Range("AG_SUPPLIERS[W" + Week + "]")
         Set StocksCol = Range("STOCKS[W" + Week + "]")
         Set OrdersCol = Range("ORDERS_BOOK[W" + Week + "]")
+        Set MonthTurnoverCol = Range("MONTH_CA[W" + Week + "]")
         
         Call CopyPasteCurrentValues( _
             CurrentSocial, SocialCol, 2, False _
@@ -144,6 +155,9 @@ Sub API(Week, Method)
         )
         Call CopyPasteCurrentValues( _
             CurrentOrderBook, OrdersCol, 3, False _
+        )
+        Call CopyPasteCurrentValues( _
+            CurrentMonthTurnover, MonthTurnoverCol, 2, False _
         )
     
         TreasuryForecast.Copy

@@ -105,11 +105,11 @@ Sub CompareWeek(Week)
         
     Sheets(ReportingSheet).Activate
         
-        Call CopyPasteData(SocialCol, Range("G10"))
-        Call CopyPasteData(AGClientsCol, Range("I85"))
-        Call CopyPasteData(AGSuppCol, Range("I95"))
-        Call CopyPasteData(StocksCol, Range("I105"))
-        Call CopyPasteData(OrdersCol, Range("I119"))
+        Call CopyPasteData(SocialCol, Range(SetParams("CompareSocial")))
+        Call CopyPasteData(AGClientsCol, Range(SetParams("CompareAGClient")))
+        Call CopyPasteData(AGSuppCol, Range(SetParams("CompareAGSuppliers")))
+        Call CopyPasteData(StocksCol, Range(SetParams("CompareStocks")))
+        Call CopyPasteData(OrdersCol, Range(SetParams("CompareOrderBook")))
 
 End Sub
 Sub CopyPasteData(Data, Destination)

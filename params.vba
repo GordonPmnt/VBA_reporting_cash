@@ -4,33 +4,58 @@ Function SetParams(Param) As String
 
     Select Case Param
         
-        'Never share the below:
+        'Password
         Case "Password"
             SetParams = "HOUGOUADMIN"
             
+            
+        'Sheets names
         Case "DataSheet"
-            SetParams = "Data Simair"
+            SetParams = "Data IMS"
 
         Case "ReportingSheet"
-            SetParams = "Reporting Simair"
+            SetParams = "Reporting IMS"
         
+        
+        'Ranges of week Data (Reporting sheet)
         Case "CurrentSocial"
             SetParams = "B10:B18"
             
         Case "CurrentAgingClients"
-            SetParams = "B86:B91"
+            SetParams = "B89:B93"
             
         Case "CurrentAgingSuppliers"
-            SetParams = "B96:B101"
+            SetParams = "B99:B103"
         
         Case "CurrentStocks"
-            SetParams = "B106:B109"
+            SetParams = "B109:B112"
             
         Case "CurrentOrderBook"
-            SetParams = "B120:B126"
+            SetParams = "B123:B129"
             
         Case "TreasuryForecast"
-            SetParams = "C34:O46"
+            SetParams = "C37:O49"
+            
+        Case "CurrentMonthTurnover"
+            SetParams = "B117:B118"
+            
+            
+        'Ranges where previous week data are paste for comparison (Reporting sheet)
+        Case "CompareSocial"
+            SetParams = "G10"
+            
+        Case "CompareAGClient"
+            SetParams = "I88"
+            
+        Case "CompareAGSuppliers"
+            SetParams = "I98"
+            
+        Case "CompareStocks"
+            SetParams = "I108"
+            
+        Case "CompareOrderBook"
+            SetParams = "I122"
+        
             
     End Select
 
