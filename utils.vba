@@ -26,8 +26,8 @@ Sub UnProtectSheets()
     Pwd = SetParams("Password")
     
 '   Protect worksheet with a password:
-    Sheets(DataSheet).Protect Password:=Pwd
-    Sheets(ReportingSheet).Protect Password:=Pwd
+    Sheets(DataSheet).Unprotect Password:=Pwd
+    Sheets(ReportingSheet).Unprotect Password:=Pwd
 
 End Sub
 
