@@ -16,7 +16,7 @@ Sub ResetData()
         If WeekAlreadyExists(Week) Then
             Call UnProtectSheets
             Call API(Week, "RESET")
-            Call ShiftWeek(Week)
+            Call CompareWeek(Week, "RESET")
             Range("B2") = Week + 1 'Increment week
             Call ProtectSheets
             MsgBox ("Reporting is now reset and ready for filling in new data.")
@@ -28,42 +28,6 @@ Sub ResetData()
             )
         End If
     End If
-
-End Sub
-Sub ShiftWeek(Week)
-
-    Dim DataSheet As String
-    Dim ReportingSheet As String
-    
-    Dim SocialCol As Range
-    Dim AGClientsCol As Range
-    Dim AGSuppCol As Range
-    Dim StocksCol As Range
-    Dim OrdersCol As Range
-    Dim MonthTurnoverCol As Range
-
-    DataSheet = SetParams("DataSheet")
-    ReportingSheet = SetParams("ReportingSheet")
-    
-    Sheets(DataSheet).Activate
-    
-        Set SocialCol = Range("SOCIAL[W" + Week + "]")
-        Set AGClientsCol = Range("AG_CLIENTS[W" + Week + "]")
-        Set AGSuppCol = Range("AG_SUPPLIERS[W" + Week + "]")
-        Set StocksCol = Range("STOCKS[W" + Week + "]")
-        Set OrdersCol = Range("ORDERS_BOOK[W" + Week + "]")
-        Set MonthTurnoverCol = Range("MONTH_CA[W" + Week + "]")
-            
-        
-    Sheets(ReportingSheet).Activate
-        
-        Call CopyPasteData(SocialCol, Range(SetParams("CompareSocial")))
-        Call CopyPasteData(AGClientsCol, Range(SetParams("CompareAGClient")))
-        Call CopyPasteData(AGSuppCol, Range(SetParams("CompareAGSuppliers")))
-        Call CopyPasteData(StocksCol, Range(SetParams("CompareStocks")))
-        Call CopyPasteData(OrdersCol, Range(SetParams("CompareOrderBook")))
-        Call CopyPasteData(MonthTurnoverCol, Range(SetParams("CompareMonthTurnover")))
-        
 
 End Sub
 Sub CopyPasteData(Data, Destination)
