@@ -30,7 +30,7 @@ Sub ValidateReporting()
             Call UnProtectSheets
             Call API(Week, "CREATE")
             Call AddWeekToParams(Week)
-            Call CompareWeek(Week)
+            Call CompareWeek(Week, "UPDATE")
             Call ProtectSheets
             MsgBox ("Reporting is now up to date.")
         End If
