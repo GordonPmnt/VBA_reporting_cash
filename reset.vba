@@ -30,15 +30,4 @@ Sub ResetData()
     End If
 
 End Sub
-Sub CopyPasteData(Data, Destination)
-    
-    Data.Copy
-    Destination.Select
-    Selection.PasteSpecial _
-            Paste:=xlPasteValues, _
-            Operation:=xlNone, _
-            SkipBlanks:=False, _
-            Transpose:=False
-    
-End Sub
 
