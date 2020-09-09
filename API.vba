@@ -231,3 +231,83 @@ Sub CompareWeek(Week, Method)
         Call CopyPasteData(MonthTurnoverCol, Range(SetParams("CompareMonthTurnover")))
 
 End Sub
+Sub ComputeAllTrends(StartWeek, Size, Method)
+
+    Dim CurrentAgingClients As Range
+    Dim CurrentAgingSuppliers As Range
+    Dim CurrentStocks As Range
+    Dim CurrentOrderBook As Range
+    
+    Dim RefWeek As String
+    
+    If Method = "UPDATE" Then
+        RefWeek = StartWeek - 1
+    ElseIf Method = "RESET" Then
+        RefWeek = StartWeek
+    End If
+        
+        
+    Set CurrentAgingClients = Range(SetParams("CurrentAgingClients"))
+    Call ComputeTrend( _
+        RefWeek, _
+        Size, _
+        CurrentAgingClients, _
+        "AG_CLIENTS", _
+        RepOffset:=5 _
+    )
+
+    Set CurrentAgingSuppliers = Range(SetParams("CurrentAgingSuppliers"))
+    Call ComputeTrend( _
+        RefWeek, _
+        Size, _
+        CurrentAgingSuppliers, _
+        "AG_SUPPLIERS", _
+        RepOffset:=5 _
+    )
+            
+    Set CurrentStocks = Range(SetParams("CurrentStocks"))
+    Call ComputeTrend( _
+        RefWeek, _
+        Size, _
+        CurrentStocks, _
+        "STOCKS", _
+        RepOffset:=5 _
+    )
+    
+    Set CurrentOrderBook = Range(SetParams("CurrentOrderBook"))
+    Call ComputeTrend( _
+        RefWeek, _
+        Size, _
+        CurrentOrderBook, _
+        "ORDERS_BOOK", _
+        RepOffset:=5 _
+    )
+
+End Sub
+Sub ComputeTrend(RefWeek, Size, DataRange, DataTableName, RepOffset)
+
+    Dim StartCol As Range
+    Dim ActiveCellRep As Range
+    Dim ActiveCellData As Range
+    Dim ActiveRowData As Range
+    Dim DestCellRep As Range
+    
+    Dim i As Integer
+    Dim j As Integer
+    
+    i = 1
+    For Each ActiveCellRep In DataRange
+        Set StartCol = Range(DataTableName + "[W" + RefWeek + "]")
+        j = 1
+        For Each ActiveCellData In StartCol
+            If i = j Then
+                Set ActiveRowData = Range(ActiveCellData, ActiveCellData.Offset(0, -Size))
+                Set DestCellRep = ActiveCellRep.Offset(0, RepOffset)
+                DestCellRep.Formula = "=IFERROR(LINEST(" + ActiveRowData.Address(External:=True) + "),"""" )"
+            End If
+            j = j + 1
+        Next ActiveCellData
+        i = i + 1
+    Next ActiveCellRep
+
+End Sub

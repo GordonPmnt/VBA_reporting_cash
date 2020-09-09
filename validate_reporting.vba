@@ -23,6 +23,7 @@ Sub ValidateReporting()
                 Call UnProtectSheets
                 Call API(Week, "UPDATE")
                 Call CompareWeek(Week, "UPDATE")
+                Call ComputeAllTrends(Week, 12, "UPDATE")
                 Call ProtectSheets
                 MsgBox ("Reporting is now up to date.")
             End If
@@ -31,6 +32,7 @@ Sub ValidateReporting()
             Call API(Week, "CREATE")
             Call AddWeekToParams(Week)
             Call CompareWeek(Week, "UPDATE")
+            Call ComputeAllTrends(Week, 12, "UPDATE")
             Call ProtectSheets
             MsgBox ("Reporting is now up to date.")
         End If

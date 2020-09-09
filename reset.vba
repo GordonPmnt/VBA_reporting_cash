@@ -17,6 +17,7 @@ Sub ResetData()
             Call UnProtectSheets
             Call API(Week, "RESET")
             Call CompareWeek(Week, "RESET")
+            Call ComputeAllTrends(Week, 12, "RESET")
             Range("B2") = Week + 1 'Increment week
             Call ProtectSheets
             MsgBox ("Reporting is now reset and ready for filling in new data.")
